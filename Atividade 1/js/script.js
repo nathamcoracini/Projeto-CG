@@ -42,7 +42,7 @@ function init() {
 	//Chama o reindenizador do WebGL
 	renderer = new THREE.WebGLRenderer();
 
-	//Cria no HTML o objeto de saída 
+	//Cria no HTML o objeto de saída
 	//Cria um container
 	document.body.appendChild(container);
 	//cria o <canvas>
@@ -53,19 +53,19 @@ function init() {
 	scene.add(camera);
 	//Define a iluminação do ambiente (cor = Branca , intensidade = mais forte que o padrão)
 	scene.add(new THREE.AmbientLight(0xffffff, 2));
-	
+
 	//Adiciona os arquivos necessários para a reindenização
 	THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
 	//Faz o carregamento da imagem a ser utilizada (eyeball)
 	new THREE.MTLLoader().setPath('../res/eyeball/').load('eyeball.mtl', function(materials){
-		materials.preload();	
+		materials.preload();
 		new THREE.OBJLoader().setMaterials(materials).setPath('../res/eyeball/')
 		.load('eyeball.obj', function(object){
 			//Adiciona o obejto carregado na cena
 			scene.add(object);
 		});
 	});
-				
+
 }
 
 //Atualiza a imagem da tela
@@ -73,14 +73,14 @@ function animate() {
 	//função do navegador window.requestAnimationFrame avisa o browser que se deseja realizar uma atualização na imagem
 	requestAnimationFrame(animate);
 	//Rotaciona a câmera já existente em -1 grau
-	rotacionar(camera, -1)
-	//Reindeniza a imagem 
+	rotacionar(camera, -0.5)
+	//Reindeniza a imagem
 	renderer.render(scene, camera);
 }
 
 //Cria as variáveis
 var camera, scene, container, renderer;
-//inicializa a imagem 
+//inicializa a imagem
 init();
 //rotaciona a imagem
 animate();
