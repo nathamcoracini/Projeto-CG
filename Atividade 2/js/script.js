@@ -60,8 +60,10 @@ function init() {
 	//Cria uma noca cena
 	scene = new THREE.Scene();
 
-	//Cria uma noca câmera
-	camera = novaCamera([10, 10, 10], [0, 0, 0])
+	//Cria uma nova câmera
+	camera1 = novaCamera([10, 10, 10], [0, 0, 0])
+	
+	camera2 = novaCamera([10, 20, 77], [0, 0, 0])
 
 	//cria um div no HTML
 	container = document.createElement('div');
@@ -80,7 +82,7 @@ function init() {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 
 	//Adiciona a câmera
-	scene.add(camera);
+	scene.add(camera1);
 
 	//Define a iluminação do ambiente (cor = Branca , intensidade = mais forte que o padrão)
 	scene.add(new THREE.AmbientLight(0xffffff, 2));
@@ -115,6 +117,15 @@ function init() {
 	});
 }
 
+var cameraSelector = false
+
+if ( keyboard.pressed(“1”)){
+	cameraSelector = true;
+}
+if ( keyboard.pressed(“2”)){
+	cameraSelector = false;
+}
+
 //Atualiza a imagem da tela
 function animate() {
 
@@ -122,11 +133,20 @@ function animate() {
 	requestAnimationFrame(animate);
 
 	//Reindeniza a imagem
-	renderer.render(scene, camera);
+	render();
+}
+
+function render () {
+	if (cameraSelector){
+		renderer.render (scene, camera1);
+	}
+	else{
+		renderer.render (scene, camera2);
+	}
 }
 
 //Cria as variáveis
-var camera, scene, container, renderer;
+var camera1, camera2, scene, container, renderer;
 
 var car = new THREE.Object3D();
 var road = new THREE.Object3D();
