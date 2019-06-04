@@ -16,3 +16,5 @@ E para rodar:
 `http-server . -p 8000`
 
 Basta então, acessar 127.0.0.1:8000 no browser.
+
+Para mais informações confira a Wiki do repositório!
