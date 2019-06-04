@@ -61,7 +61,7 @@ function init() {
 	scene = new THREE.Scene();
 
 	//Cria uma noca câmera
-	camera = novaCamera([0, 30, 0], [0, 0, 0])
+	camera = novaCamera([10, 10, 10], [0, 0, 0])
 
 	//cria um div no HTML
 	container = document.createElement('div');
@@ -104,6 +104,7 @@ function init() {
 		new THREE.OBJLoader().setMaterials(materials).setPath('../res/road/')
 		.load('road.obj', function(object){
 			//Adiciona o objeto carregado na cena
+			object.scale.set(1, 1, 5)
 			road.add(object);
 			scene.add(object);
 		});
