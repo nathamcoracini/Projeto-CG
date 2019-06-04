@@ -43,13 +43,11 @@ function controler(e){
 	key = String.fromCharCode(e.which);
 
 	if (key == "W"){
-		car.position.z = car.position.z - 1
-	} else if (key == "S"){
 		car.position.z = car.position.z + 1
-	} else if (key == "D"){
-		car.position.x = car.position.x + 1
-	} else if (key == "A"){
-		car.position.x = car.position.x - 1
+		camera1.position.z = camera1.position.z + 1
+	} else if (key == "S"){
+		car.position.z = car.position.z - 1
+		camera1.position.z = camera1.position.z - 1
 	} else if (key == "1"){
 		cameraSelector = true;
 	} else if (key == "2"){
@@ -65,7 +63,7 @@ function init() {
 	scene = new THREE.Scene();
 
 	//Cria uma nova câmera
-	camera1 = novaCamera([10, 10, 10], [0, 0, 0])
+	camera1 = novaCamera([0, 2, 0], [0, 0, 10])
 	
 	camera2 = novaCamera([10, 20, 77], [0, 0, 0])
 
@@ -97,12 +95,13 @@ function init() {
 	//Adiciona os arquivos necessários para a reindenização
 
 	THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
-	// Faz o carregamento da imagem a ser utilizada (eyeball)
+	// Faz o carregamento das imagens a serem utilizadas (carro e estrada)
 
 	new THREE.MTLLoader().setPath('../res/car/').load('car.mtl', function(materials){
 		materials.preload();
 		new THREE.OBJLoader().setMaterials(materials).setPath('../res/car/')
 		.load('car.obj', function(object){
+			
 			//Adiciona o objeto carregado na cena
 			car.add(object);
 			scene.add(car);
@@ -113,7 +112,8 @@ function init() {
 		materials.preload();
 		new THREE.OBJLoader().setMaterials(materials).setPath('../res/road/')
 		.load('road.obj', function(object){
-			//Adiciona o objeto carregado na cena
+			
+			//Escala o objeto e adiciona ele na cena
 			object.scale.set(1, 1, 5)
 			road.add(object);
 			scene.add(road);
@@ -153,4 +153,4 @@ var road = new THREE.Object3D();
 init();
 
 //atualiza a imagem
-animate();
+animate();	
