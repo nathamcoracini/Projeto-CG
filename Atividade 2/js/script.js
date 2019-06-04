@@ -43,13 +43,13 @@ function controler(e){
 	key = String.fromCharCode(e.which);
 
 	if (key == "W"){
-		eyeball.position.z = eyeball.position.z - 1
+		car.position.z = car.position.z - 1
 	} else if (key == "S"){
-		eyeball.position.z = eyeball.position.z + 1
+		car.position.z = car.position.z + 1
 	} else if (key == "D"){
-		eyeball.position.x = eyeball.position.x + 1
+		car.position.x = car.position.x + 1
 	} else if (key == "A"){
-		eyeball.position.x = eyeball.position.x - 1
+		car.position.x = car.position.x - 1
 	}
 
 	console.log(key)
@@ -93,10 +93,14 @@ function init() {
 	THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
 	// Faz o carregamento da imagem a ser utilizada (eyeball)
 
-	new THREE.OBJLoader().setPath('../res/car/') .load('car.obj', function(object){
-		//Adiciona o objeto carregado na cena
-		eyeball.add(object);
-		scene.add(eyeball);
+	new THREE.MTLLoader().setPath('../res/car/').load('car.mtl', function(materials){
+		materials.preload();
+		new THREE.OBJLoader().setMaterials(materials).setPath('../res/car/')
+		.load('car.obj', function(object){
+			//Adiciona o objeto carregado na cena
+			car.add(object);
+			scene.add(car);
+		});
 	});
 
 	new THREE.MTLLoader().setPath('../res/road/').load('road.mtl', function(materials){
@@ -106,7 +110,7 @@ function init() {
 			//Adiciona o objeto carregado na cena
 			object.scale.set(1, 1, 5)
 			road.add(object);
-			scene.add(object);
+			scene.add(road);
 		});
 	});
 }
@@ -124,7 +128,6 @@ function animate() {
 //Cria as variáveis
 var camera, scene, container, renderer;
 
-var eyeball = new THREE.Object3D();
 var car = new THREE.Object3D();
 var road = new THREE.Object3D();
 
