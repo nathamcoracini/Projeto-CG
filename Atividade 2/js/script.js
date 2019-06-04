@@ -89,26 +89,14 @@ function init() {
 	document.body.addEventListener('keydown', controler);
 
 	//Adiciona os arquivos necessários para a reindenização
-	THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
-	//Faz o carregamento da imagem a ser utilizada (eyeball)
-	new THREE.MTLLoader().setPath('../res/eyeball/').load('eyeball.mtl', function(materials){
-		materials.preload();
-		new THREE.OBJLoader().setMaterials(materials).setPath('../res/eyeball/')
-		.load('eyeball.obj', function(object){
-			//Adiciona o objeto carregado na cena
-			eyeball.add(object);
-			scene.add(eyeball);
-		});
-	});
 
-	new THREE.MTLLoader().setPath('../res/car/').load('car.mtl', function(materials){
-		materials.preload();
-		new THREE.OBJLoader().setMaterials(materials).setPath('../res/car/')
-		.load('car.obj', function(object){
-			//Adiciona o objeto carregado na cena
-			car.add(object);
-			scene.add(car);
-		});
+	THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
+	// Faz o carregamento da imagem a ser utilizada (eyeball)
+
+	new THREE.OBJLoader().setPath('../res/car/') .load('car.obj', function(object){
+		//Adiciona o objeto carregado na cena
+		eyeball.add(object);
+		scene.add(eyeball);
 	});
 
 	new THREE.MTLLoader().setPath('../res/road/').load('road.mtl', function(materials){
@@ -117,7 +105,7 @@ function init() {
 		.load('road.obj', function(object){
 			//Adiciona o objeto carregado na cena
 			road.add(object);
-			scene.add(road);
+			scene.add(object);
 		});
 	});
 }
