@@ -50,6 +50,10 @@ function controler(e){
 		car.position.x = car.position.x + 1
 	} else if (key == "A"){
 		car.position.x = car.position.x - 1
+	} else if (key == "1"){
+		cameraSelector = true;
+	} else if (key == "2"){
+		cameraSelector = false;
 	}
 
 	console.log(key)
@@ -119,12 +123,6 @@ function init() {
 
 var cameraSelector = false
 
-if ( keyboard.pressed(“1”)){
-	cameraSelector = true;
-}
-if ( keyboard.pressed(“2”)){
-	cameraSelector = false;
-}
 
 //Atualiza a imagem da tela
 function animate() {
